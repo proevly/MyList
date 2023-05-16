@@ -1,0 +1,110 @@
+package Listwork;
+
+import java.util.Arrays;
+
+public class MyList<T> {
+   T[] list;
+   int size = 0 ;
+   private int capacity = 10;
+   public MyList() {
+
+   }
+   public MyList(int newCapacity){
+      this.capacity = newCapacity;
+   }
+   public void Add(T data){
+      if(this.size<capacity){
+         list[size++]=data;
+      }
+      else{
+         this.capacity = capacity *2;
+         list[size++]=data;
+      }
+   }
+   public int getSize(){
+      return this.size;
+   }
+   public int getCapacity(){
+      return this.capacity;
+   }
+   public T getIndex(int index){
+      if(index >getSize()){
+         return null;
+      }
+      else{
+         return list[index];
+      }
+   }
+   /*
+   public void remove(int index){ //buna bakılıcak
+      if(index >getSize()){
+         return;
+      }
+      else{
+         list[index]
+      }
+   }
+   */
+   public void set(int index,T data){
+      if(index>getSize()|| index<0){
+         return;
+      }
+      else{
+         list[index] = data;
+      }
+   }
+   @Override
+   public String toString(){
+      return Arrays.toString(list);
+   }
+   public int indexOf(T data) {
+      int indexs=-1;
+      for (int i = 0; i < list.length; i++) {
+         if (list[i] == data) {
+
+            indexs = i;
+         }
+      }
+   return indexs;
+   }
+   public boolean isEmpty(){
+      if(getSize()==0){
+         System.out.println("This list is Empty!");
+         return false;
+      }
+      else{
+         System.out.println("This list is not Empty!");
+         return true;
+      }
+   }
+   public T[] toArray(){
+      T[] newList = (T[]) new Object[getSize()];
+      for(int i =0; i<this.list.length;i++){
+         newList[i] =this.list[i];
+      }
+      return newList;
+   }
+   public void clear(){
+      this.size=0;
+      this.capacity = 10;
+      this.list = (T[]) new Object[getSize()];
+   }
+   public MyList<T> subList(int x, int y){
+      MyList<T> sub =new MyList<>(y-x+1);
+      for (int i=x;i<=y;i++){
+         sub.Add((T)this.list[i]);
+      }
+      return sub;
+   }
+   public boolean contains(T data){
+      boolean key = false;
+      for(T s:list){
+         if(s==data){
+            key = true;
+         }
+      }
+      return key;
+   }
+
+
+}
